@@ -1,0 +1,59 @@
+name: reset_exercises
+on: 
+  workflow_dispatch:
+permissions: write-all
+jobs:
+  close-pulls:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+      - run: | 
+          for p in $(gh pr list --json number --jq '.[].number'); do
+            gh pr close $p
+          done
+  close-issues:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+    - uses: actions/checkout@v3
+    - run: | 
+        for p in $(gh issue list --limit 200 --json number --jq '.[].number'); do
+          gh issue close $p
+        done
+  reset-branches:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+    - uses: actions/checkout@v3
+      with: 
+        fetch-depth: 0
+    - run: | 
+        for b in $(git branch -r); do
+          if [[ $b != origin/main ]] && [[ $b != *backup* ]]; then 
+            b=${b/origin\//}
+            git push origin --delete "$b"
+            git checkout backup-"$b"
+            git checkout -b "$b" "backup-""$b"
+            git push -f origin "$b"
+          fi
+        done
+  reset-main:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+        with: 
+          fetch-depth: 0
+      - run: | 
+          git config user.name github-actions
+          git config user.email "github-actions@github.com"
+          git reset --hard beginning
+          git push -f origin main
+
+
+

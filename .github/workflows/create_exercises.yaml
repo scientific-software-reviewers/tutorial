@@ -1,0 +1,62 @@
+name: create_exercises
+on: 
+  workflow_dispatch:
+   inputs: 
+      language:
+        description: 'Language'
+        required: true
+        default: text
+        type: choice
+        options:
+        - text 
+        - python
+        - Fortran
+permissions: write-all
+jobs:
+  create-labels:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+     - uses: actions/checkout@v3
+     - run: gh label create ${{ inputs.language }} -f
+  create-pulls-matrix:
+    needs: create-labels
+    strategy:
+      matrix:
+        exercise: [1, 2, 3]
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - run: |
+          echo "Language: ${{ inputs.language }}"
+          echo "Exercise: ${{ matrix.exercise }}"
+      # checkout repo
+      - uses: actions/checkout@v3
+        with: 
+         fetch-depth: 0
+      - name: create issue for exercise ${{ inputs.exercise }}
+        # check if the issue file exists before creating the issue
+        # store created issue in BAR to use in pull request text
+        env:
+          issueFile: 'issues/${{ inputs.language }}-ex${{ matrix.exercise }}-issue.md'
+        if: hashFiles(env.issueFile) !='' 
+        run: |
+          echo $GITHUB_SERVER_URL/$GITHUB_REPOSITORY
+          echo ${{ github.server_url }}/${{ github.repository }}
+          cat issues/${{ inputs.language }}-ex${{ matrix.exercise }}-issue.md > issuebody
+          sed -i 's|REPO_URL|${{ github.server_url }}/${{ github.repository }}/blob/main|g' issuebody
+          echo "BAR=$(gh issue create --title "${{ inputs.language }}: Exercise ${{ matrix.exercise }}" --body-file issuebody --label ${{ inputs.language }})" >> $GITHUB_ENV
+      - name: query_branch_exists
+        run: |
+          echo "FOO=$(git branch -r | grep "${{ inputs.language }}-${{ matrix.exercise }}" | grep -v "backup")" >> $GITHUB_ENV
+      - name: create pull request for exercise ${{ matrix.exercise }}
+        run: | 
+          if [ '${{ env.FOO }}' == '' ]; then
+            echo "no branch ${{ inputs.language }}-${{ matrix.exercise }} to create pull request from"
+          else
+             cat pull_requests/${{ inputs.language }}-ex${{ matrix.exercise }}-pullbody.md > pullbody
+             echo "Fixes ${{ env.BAR }} ${{ inputs.language }}" >> pullbody
+             gh pr create -B main -H "${{ inputs.language }}-${{ matrix.exercise }}" --title 'Exercise ${{ matrix.exercise }} ${{ inputs.language }}.' --body-file pullbody --label ${{ inputs.language }}
+          fi 
