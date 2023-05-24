@@ -1,0 +1,28 @@
+name: reset_exercises
+on: 
+  workflow_dispatch:
+permissions: write-all
+jobs:
+  close-pulls:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+      - run: | 
+          for p in $(gh pr list --json number --jq '.[].number'); do
+            gh pr close $p
+          done
+  close-issues:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+    - uses: actions/checkout@v3
+    - run: | 
+        for p in $(gh issue list --limit 200 --json number --jq '.[].number'); do
+          gh issue close $p
+        done
+
+
+
