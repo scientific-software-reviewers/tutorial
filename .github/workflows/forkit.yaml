@@ -1,6 +1,6 @@
 name: forkit
 
-on: fork
+on: create
 
 jobs:
   first_demo_job:
