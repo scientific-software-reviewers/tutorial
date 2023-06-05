@@ -4,12 +4,13 @@ jobs:
   create-pulls:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
+      # checkout repo
+      - uses: actions/checkout@v3
         
-    - name: create pull request 1
-      run: gh pr create -B main -H pull1 --title 'Merge branch_to_merge into base_branch' --body 'Created by Github action'
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Test hello
+        run: echo Hello, world!
+        
+      - name: create pull request 1
+        run: gh pr create -B main -H pull1 --title 'Merge branch_to_merge into base_branch' --body 'Created by Github action'
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
