@@ -1,5 +1,6 @@
 name: open_pulls
 on: create
+permissions: write-all
 jobs:
   create-pulls:
     runs-on: ubuntu-latest
