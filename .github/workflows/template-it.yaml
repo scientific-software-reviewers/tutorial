@@ -18,4 +18,4 @@ jobs:
           body: Update changelog to reflect release changes
           branch: update-changelog
           base: main
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
