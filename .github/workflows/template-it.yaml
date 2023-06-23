@@ -1,5 +1,5 @@
 name: open_pulls
-on: create
+on: workflow_dispatch
 permissions: write-all
 jobs:
   create-pulls:
