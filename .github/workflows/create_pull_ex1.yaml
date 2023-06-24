@@ -1,10 +1,22 @@
 name: open_pull_ex
-on: workflow_dispatch
+on: workflow_dispatch:
+   inputs: 
+      lang:
+        description: 'Language'
+        required: true
+        default: text
+        type: choice
+        options:
+        - text 
+        - python
+        - fortran
 permissions: write-all
 jobs:
   create-pulls:
     runs-on: ubuntu-latest
     steps:
+      - run: 
+          echo "Language: $LANG
       # checkout repo
       - uses: actions/checkout@v3
         
