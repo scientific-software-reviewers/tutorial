@@ -2,7 +2,7 @@ name: open_pull_ex
 on: 
   workflow_dispatch:
    inputs: 
-      lang:
+      language:
         description: 'Language'
         required: true
         default: text
@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "Language: $LANG"
+          echo "Language: ${{ inputs.language }}"
       # checkout repo
      # - uses: actions/checkout@v3
      #   
