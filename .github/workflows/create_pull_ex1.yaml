@@ -1,5 +1,6 @@
 name: open_pull_ex
-on: workflow_dispatch:
+on: 
+  workflow_dispatch:
    inputs: 
       lang:
         description: 'Language'
