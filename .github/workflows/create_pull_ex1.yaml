@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "Language: $LANG
+          echo "Language: $LANG"
       # checkout repo
      # - uses: actions/checkout@v3
      #   
