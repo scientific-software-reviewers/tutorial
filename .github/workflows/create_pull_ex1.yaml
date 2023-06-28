@@ -15,13 +15,16 @@ permissions: write-all
 jobs:
   create-pulls:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - run: |
           echo "Language: ${{ inputs.language }}"
       # checkout repo
-     # - uses: actions/checkout@v3
-     #   
-     # - name: create pull request for exercise 1
-     #   run: gh pr create -B main -H text_pull --title 'Exercise 1. Text' --body 'Created by Github action'
-     #   env:
-     #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v3
+      - name: create lablel for issues
+        run: gh label create ${{ inputs.language }} -f
+      - name: create issue for exercise 1
+        run: gh issue create --template "template-for-${{ inputs.language }}-issue.md" --label ${{ inputs.language }}
+      - name: create pull request for exercise 1
+        run: gh pr create -B main -H ${{ inputs.language }} --title 'Exercise 1 ${{ inputs.language }}. ' --body 'Created by Github action ${{ inputs.language }}'
