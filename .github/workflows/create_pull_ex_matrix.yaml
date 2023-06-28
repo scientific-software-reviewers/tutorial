@@ -13,18 +13,22 @@ on:
         - fortran
 permissions: write-all
 jobs:
-  create-pulls:
+  create-pulls-matrix:
+    strategy:
+      matrix:
+        exercise: [1, 2, 3]
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - run: |
           echo "Language: ${{ inputs.language }}"
+          echo "Exercise: ${{ matrix.exercise }}"
       # checkout repo
       - uses: actions/checkout@v3
       - name: create lablel for issues
         run: gh label create ${{ inputs.language }} -f
-      - name: create issue for exercise 1
-        run: gh issue create --title "Exercise 1 ${{ inputs.language }}" --body-file "guts/${{ inputs.language }}-ex1-issue.md" --label ${{ inputs.language }}
+      - name: create issue for exercise ${{ inputs.exercise }}
+        run: gh issue create --title "Exercise 1 ${{ inputs.language }}" --body-file "guts/${{ inputs.language }}-ex${{ matrix.exercise }}-issue.md" --label ${{ inputs.language }}
       - name: create pull request for exercise 1
-        run: gh pr create -B main -H ${{ inputs.language }} --title 'Exercise 1 ${{ inputs.language }}. ' --body 'Created by Github action ${{ inputs.language }}'
+        run: gh pr create -B main -H "${{ inputs.language }}-${{ matrix.exercise }}" --title 'Exercise ${{ matrix.exercise }} ${{ inputs.language }}. ' --body ' ${{ inputs.language }}'
