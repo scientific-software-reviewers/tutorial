@@ -1,4 +1,4 @@
-name: open_pull_ex
+name: create_exercises
 on: 
   workflow_dispatch:
    inputs: 
@@ -29,6 +29,6 @@ jobs:
       - name: create lablel for issues
         run: gh label create ${{ inputs.language }} -f
       - name: create issue for exercise ${{ inputs.exercise }}
-        run: gh issue create --title "Exercise 1 ${{ inputs.language }}" --body-file "guts/${{ inputs.language }}-ex${{ matrix.exercise }}-issue.md" --label ${{ inputs.language }}
-      - name: create pull request for exercise 1
+        run: gh issue create --title "Exercise ${{ matrix.exercise }} ${{ inputs.language }}" --body-file "guts/${{ inputs.language }}-ex${{ matrix.exercise }}-issue.md" --label ${{ inputs.language }}
+      - name: create pull request for exercise ${{ matrix.exercise }}
         run: gh pr create -B main -H "${{ inputs.language }}-${{ matrix.exercise }}" --title 'Exercise ${{ matrix.exercise }} ${{ inputs.language }}. ' --body ' ${{ inputs.language }}'
