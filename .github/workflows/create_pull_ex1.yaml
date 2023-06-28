@@ -20,9 +20,10 @@ jobs:
     steps:
       - run: |
           echo "Language: ${{ inputs.language }}"
-      - run: gh label create ${{ inputs.language }} -f
       # checkout repo
       - uses: actions/checkout@v3
+      - name: create lablel for issues
+        run: gh label create ${{ inputs.language }} -f
       - name: create issue for exercise 1
         run: gh issue create --title "Exercise 1" --body "helpful text" --label ${{ inputs.language }}
       - name: create pull request for exercise 1
