@@ -26,4 +26,4 @@ jobs:
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: create issue for exercise 1
-        run: gh issue create @me --title "Exercise 1" 
+        run: gh issue create -a @me --title "Exercise 1" 
