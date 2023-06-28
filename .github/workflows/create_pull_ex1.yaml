@@ -25,3 +25,5 @@ jobs:
         run: gh pr create -B main -H ${{ inputs.language }} --title 'Exercise ${{ inputs.language }}. Text' --body 'Created by Github action ${{ inputs.language }}'
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: create issue for exercise 1
+        run: gh issue create @me --title "Exercise 1" 
