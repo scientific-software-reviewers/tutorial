@@ -23,6 +23,6 @@ jobs:
       # checkout repo
       - uses: actions/checkout@v3
       - name: create issue for exercise 1
-        run: gh issue create -a @me --title "Exercise 1"        
+        run: gh issue create -a @me --title "Exercise 1" --body "helpful text" --label ${{ inputs.language }}
       - name: create pull request for exercise 1
-        run: gh pr create -B main -H ${{ inputs.language }} --title 'Exercise 1${{ inputs.language }}. ' --body 'Created by Github action ${{ inputs.language }}'
+        run: gh pr create -B main -H ${{ inputs.language }} --title 'Exercise 1 ${{ inputs.language }}. ' --body 'Created by Github action ${{ inputs.language }}'
