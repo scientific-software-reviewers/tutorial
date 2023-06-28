@@ -25,6 +25,6 @@ jobs:
       - name: create lablel for issues
         run: gh label create ${{ inputs.language }} -f
       - name: create issue for exercise 1
-        run: gh issue create --template "template-for-${{ inputs.language }}-issue.md" --label ${{ inputs.language }}
+        run: gh issue create --body-file "guts/${{ inputs.language }}-ex1-issue.md" --label ${{ inputs.language }}
       - name: create pull request for exercise 1
         run: gh pr create -B main -H ${{ inputs.language }} --title 'Exercise 1 ${{ inputs.language }}. ' --body 'Created by Github action ${{ inputs.language }}'
