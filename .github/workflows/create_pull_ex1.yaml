@@ -20,7 +20,7 @@ jobs:
     steps:
       - run: |
           echo "Language: ${{ inputs.language }}"
-      - name: checkout repo
+      # checkout repo
       - uses: actions/checkout@v3
       - name: create issue for exercise 1
         run: gh issue create -a @me --title "Exercise 1"        
