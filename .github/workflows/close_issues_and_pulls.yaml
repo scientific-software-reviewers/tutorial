@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: | 
-          for p in $(gh pr list --json number --jq '.[].number')l do
+          for p in $(gh pr list --json number --jq '.[].number'); do
             echo "hello" $p
           done
             
