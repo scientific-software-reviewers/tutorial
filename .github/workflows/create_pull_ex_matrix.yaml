@@ -40,6 +40,7 @@ jobs:
         # check if the issue file exists before creating the issue
         env:
           issueFile: 'guts/${{ inputs.language }}-ex${{ matrix.exercise }}-issue.md'
+          ISSUE:  ${{ github.event.issue.number }}
         if: hashFiles(env.issueFile) !='' 
         run: |
            gh issue create --title "Exercise ${{ matrix.exercise }} ${{ inputs.language }}" --body-file "guts/${{ inputs.language }}-ex${{ matrix.exercise }}-issue.md" --label ${{ inputs.language }}
