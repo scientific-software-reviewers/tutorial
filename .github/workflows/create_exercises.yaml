@@ -52,5 +52,5 @@ jobs:
           if [ '${{ env.FOO }}' == '' ]; then
             echo "no branch ${{ inputs.language }}-${{ matrix.exercise }} to create pull request from"
           else
-             gh pr create -B main -H "${{ inputs.language }}-${{ matrix.exercise }}" --title 'Exercise ${{ matrix.exercise }} ${{ inputs.language }}. ' --body 'Fixes ${{ env.BAR }} ${{ inputs.language }}'
+             gh pr create -B main -H "${{ inputs.language }}-${{ matrix.exercise }}" --title 'Exercise ${{ matrix.exercise }} ${{ inputs.language }}. ' --body 'Fixes ${{ env.BAR }} ${{ inputs.language }}' --label ${{ inputs.language }}
           fi 
