@@ -1,6 +1,7 @@
 name: reset_exercises
 on: 
   workflow_dispatch:
+permissions: write-all
 jobs:
   close-pulls:
     runs-on: ubuntu-latest
