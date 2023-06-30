@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: | 
-          gh list prs 
+          gh pr list --state open
 
 
 
