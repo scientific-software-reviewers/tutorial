@@ -4,6 +4,8 @@ on:
 jobs:
   close-pulls:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - run: | 
           gh pr list --state open
