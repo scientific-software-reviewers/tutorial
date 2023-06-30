@@ -41,11 +41,10 @@ jobs:
         env:
           issueFile: 'guts/${{ inputs.language }}-ex${{ matrix.exercise }}-issue.md'
         if: hashFiles(env.issueFile) !='' 
-        run: gh issue create --title "Exercise ${{ matrix.exercise }} ${{ inputs.language }}" --body-file "guts/${{ inputs.language }}-ex${{ matrix.exercise }}-issue.md" --label ${{ inputs.language }}
+        run: echo "BAR=$(gh issue create --title "Exercise ${{ matrix.exercise }} ${{ inputs.language }}" --body-file "guts/${{ inputs.language }}-ex${{ matrix.exercise }}-issue.md" --label ${{ inputs.language }}" >> $GITHUB_ENV 
       - name: get_issue_number
         run: |
-          echo "Hello" $(jq --raw-output .issue.number "$GITHUB_EVENT_PATH")
-          echo "Hello" $(gh issue list --limit 1 --json number )
+          echo "Hello" ${{ env.BAR }}
       - name: query_branch_exists
         run: |
           echo "FOO=$(git branch -r | grep "${{ inputs.language }}-${{ matrix.exercise }}")" >> $GITHUB_ENV
