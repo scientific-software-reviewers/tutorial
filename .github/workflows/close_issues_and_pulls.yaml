@@ -20,7 +20,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - run: | 
-        for p in $(gh issue list --json number --jq '.[].number'); do
+        for p in $(gh issue list --limit 200 --json number --jq '.[].number'); do
           gh issue close $p
         done
 
