@@ -40,13 +40,10 @@ jobs:
         # check if the issue file exists before creating the issue
         env:
           issueFile: 'guts/${{ inputs.language }}-ex${{ matrix.exercise }}-issue.md'
-          ISSUE:  ${{ github.event.issue.number }}
         if: hashFiles(env.issueFile) !='' 
-        run: |
-           gh issue create --title "Exercise ${{ matrix.exercise }} ${{ inputs.language }}" --body-file "guts/${{ inputs.language }}-ex${{ matrix.exercise }}-issue.md" --label ${{ inputs.language }}
-           echo "ISSUE=${{ github.event.issue.number }}" >> $GITHUB_ENV
-           echo "hello issue creation step" ${{ env.ISSUE }}
-           echo "issue number" ${{ github.event.issue.number }}
+        run: gh issue create --title "Exercise ${{ matrix.exercise }} ${{ inputs.language }}" --body-file "guts/${{ inputs.language }}-ex${{ matrix.exercise }}-issue.md" --label ${{ inputs.language }}
+      - name: get_issue_number
+        run: echo "Hello" ${{ github.event.issue.number }}
       - name: query_branch_exists
         run: |
           echo "FOO=$(git branch -r | grep "${{ inputs.language }}-${{ matrix.exercise }}")" >> $GITHUB_ENV
