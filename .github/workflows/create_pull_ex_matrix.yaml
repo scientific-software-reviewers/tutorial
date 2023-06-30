@@ -13,7 +13,15 @@ on:
         - fortran
 permissions: write-all
 jobs:
+  create-labels:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+     - uses: actions/checkout@v3
+     - run: gh label create ${{ inputs.language }} -f
   create-pulls-matrix:
+    needs: create-labels
     strategy:
       matrix:
         exercise: [1, 2, 3]
@@ -26,9 +34,21 @@ jobs:
           echo "Exercise: ${{ matrix.exercise }}"
       # checkout repo
       - uses: actions/checkout@v3
-      - name: create lablel for issues
-        run: gh label create ${{ inputs.language }} -f
+        with: 
+         fetch-depth: 0
       - name: create issue for exercise ${{ inputs.exercise }}
+        # check if the issue file exists before creating the issue
+        env:
+          issueFile: 'guts/${{ inputs.language }}-ex${{ matrix.exercise }}-issue.md'
+        if: hashFiles(env.issueFile) !='' 
         run: gh issue create --title "Exercise ${{ matrix.exercise }} ${{ inputs.language }}" --body-file "guts/${{ inputs.language }}-ex${{ matrix.exercise }}-issue.md" --label ${{ inputs.language }}
+      - name: query_branch_exists
+        run: |
+          echo "FOO=$(git branch -r | grep "${{ inputs.language }}-${{ matrix.exercise }}")" >> $GITHUB_ENV
       - name: create pull request for exercise ${{ matrix.exercise }}
-        run: gh pr create -B main -H "${{ inputs.language }}-${{ matrix.exercise }}" --title 'Exercise ${{ matrix.exercise }} ${{ inputs.language }}. ' --body ' ${{ inputs.language }}'
+        run: | 
+          if [ '${{ env.FOO }}' == '' ]; then
+            echo "no branch ${{ inputs.language }}-${{ matrix.exercise }} to create pull request from"
+          else
+             gh pr create -B main -H "${{ inputs.language }}-${{ matrix.exercise }}" --title 'Exercise ${{ matrix.exercise }} ${{ inputs.language }}. ' --body ' ${{ inputs.language }}'
+          fi 
