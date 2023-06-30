@@ -38,13 +38,12 @@ jobs:
          fetch-depth: 0
       - name: create issue for exercise ${{ inputs.exercise }}
         # check if the issue file exists before creating the issue
+        # store created issue in BAR to use in pull request text
         env:
           issueFile: 'guts/${{ inputs.language }}-ex${{ matrix.exercise }}-issue.md'
         if: hashFiles(env.issueFile) !='' 
-        run: echo "BAR=$(gh issue create --title "Exercise ${{ matrix.exercise }} ${{ inputs.language }}" --body-file "guts/${{ inputs.language }}-ex${{ matrix.exercise }}-issue.md" --label ${{ inputs.language }})" >> $GITHUB_ENV 
-      - name: get_issue_number
         run: |
-          echo "Hello" ${{ env.BAR }}
+          echo "BAR=$(gh issue create --title "Exercise ${{ matrix.exercise }} ${{ inputs.language }}" --body-file "guts/${{ inputs.language }}-ex${{ matrix.exercise }}-issue.md" --label ${{ inputs.language }})" >> $GITHUB_ENV 
       - name: query_branch_exists
         run: |
           echo "FOO=$(git branch -r | grep "${{ inputs.language }}-${{ matrix.exercise }}")" >> $GITHUB_ENV
@@ -53,6 +52,5 @@ jobs:
           if [ '${{ env.FOO }}' == '' ]; then
             echo "no branch ${{ inputs.language }}-${{ matrix.exercise }} to create pull request from"
           else
-             echo "Hello" ${{ env.ISSUE }}
              gh pr create -B main -H "${{ inputs.language }}-${{ matrix.exercise }}" --title 'Exercise ${{ matrix.exercise }} ${{ inputs.language }}. ' --body 'Fixes ${{ env.BAR }} ${{ inputs.language }}'
           fi 
