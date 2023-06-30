@@ -44,7 +44,7 @@ jobs:
         run: |
            gh issue create --title "Exercise ${{ matrix.exercise }} ${{ inputs.language }}" --body-file "guts/${{ inputs.language }}-ex${{ matrix.exercise }}-issue.md" --label ${{ inputs.language }}
            echo "ISSUE=${{ github.event.issue.number }}" >> $GITHUB_ENV
-           echo ${{ env.ISSUE }}
+           echo "hello issue creation step" ${{ env.ISSUE }}
       - name: query_branch_exists
         run: |
           echo "FOO=$(git branch -r | grep "${{ inputs.language }}-${{ matrix.exercise }}")" >> $GITHUB_ENV
