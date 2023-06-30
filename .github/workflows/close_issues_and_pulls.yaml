@@ -9,7 +9,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: | 
-          gh pr list --state open
+          gh pr list --jq pluck number
+            
 
 
 
