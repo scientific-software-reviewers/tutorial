@@ -45,7 +45,7 @@ jobs:
       - name: get_issue_number
         run: |
           echo "Hello" $(jq --raw-output .issue.number "$GITHUB_EVENT_PATH")
-          echo "Hello" $(gh issue list --limit 1)
+          echo "Hello" $(gh issue list --limit 1 --json number )
       - name: query_branch_exists
         run: |
           echo "FOO=$(git branch -r | grep "${{ inputs.language }}-${{ matrix.exercise }}")" >> $GITHUB_ENV
