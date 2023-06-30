@@ -44,7 +44,7 @@ jobs:
         if: hashFiles(env.issueFile) !='' 
         run: |
            gh issue create --title "Exercise ${{ matrix.exercise }} ${{ inputs.language }}" --body-file "guts/${{ inputs.language }}-ex${{ matrix.exercise }}-issue.md" --label ${{ inputs.language }}
-           echo "ISSUE=env.issueNum" 
+           echo $issueNum 
       - name: query_branch_exists
         run: |
           echo "FOO=$(git branch -r | grep "${{ inputs.language }}-${{ matrix.exercise }}")" >> $GITHUB_ENV
