@@ -13,7 +13,16 @@ jobs:
           for p in $(gh pr list --json number --jq '.[].number'); do
             gh pr close $p
           done
-            
+  close-issues:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+    - uses: actions/checkout@v3
+    - run: | 
+        for p in $(gh issue list --json number --jq '.[].number'); do
+          gh issue close $p
+        done
 
 
 
