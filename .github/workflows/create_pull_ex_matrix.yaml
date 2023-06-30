@@ -41,7 +41,7 @@ jobs:
         env:
           issueFile: 'guts/${{ inputs.language }}-ex${{ matrix.exercise }}-issue.md'
         if: hashFiles(env.issueFile) !='' 
-        run: echo "BAR=$(gh issue create --title "Exercise ${{ matrix.exercise }} ${{ inputs.language }}" --body-file "guts/${{ inputs.language }}-ex${{ matrix.exercise }}-issue.md" --label ${{ inputs.language }}" >> $GITHUB_ENV 
+        run: echo "BAR=$(gh issue create --title "Exercise ${{ matrix.exercise }} ${{ inputs.language }}" --body-file "guts/${{ inputs.language }}-ex${{ matrix.exercise }}-issue.md" --label ${{ inputs.language }}") >> $GITHUB_ENV 
       - name: get_issue_number
         run: |
           echo "Hello" ${{ env.BAR }}
