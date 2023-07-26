@@ -40,10 +40,10 @@ jobs:
         # check if the issue file exists before creating the issue
         # store created issue in BAR to use in pull request text
         env:
-          issueFile: 'guts/${{ inputs.language }}-ex${{ matrix.exercise }}-issue.md'
+          issueFile: 'issues/${{ inputs.language }}-ex${{ matrix.exercise }}-issue.md'
         if: hashFiles(env.issueFile) !='' 
         run: |
-          echo "BAR=$(gh issue create --title "Exercise ${{ matrix.exercise }} ${{ inputs.language }}" --body-file "guts/${{ inputs.language }}-ex${{ matrix.exercise }}-issue.md" --label ${{ inputs.language }})" >> $GITHUB_ENV 
+          echo "BAR=$(gh issue create --title "Exercise ${{ matrix.exercise }} ${{ inputs.language }}" --body-file "issues/${{ inputs.language }}-ex${{ matrix.exercise }}-issue.md" --label ${{ inputs.language }})" >> $GITHUB_ENV 
       - name: query_branch_exists
         run: |
           echo "FOO=$(git branch -r | grep "${{ inputs.language }}-${{ matrix.exercise }}")" >> $GITHUB_ENV
