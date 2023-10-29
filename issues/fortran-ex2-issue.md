@@ -10,7 +10,9 @@ Take a look at the pull request
 
 What would make the pull request easier to review?
 What would improve the pull request? Add a comment.
-Are the comments up to date, necessary, helpful? Would you remove some of these comments? Add suggestions for which comments to remove and/or change.
-Which module variables and routines should be public? Add a suggestion for which variables/routines to make private to the module.
+Are the comments up to date, necessary, helpful? 
+Would you remove some of these comments? Add suggestions for which comments to remove and/or change.
+Which module variables and routines should be public? 
+Add a suggestion for which variables/routines to make private to the module.
 Have any bugs been introduced during the code refactoring?
 
