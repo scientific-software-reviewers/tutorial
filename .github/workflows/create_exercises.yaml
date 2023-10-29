@@ -10,7 +10,7 @@ on:
         options:
         - text 
         - python
-        - fortran
+        - Fortran
 permissions: write-all
 jobs:
   create-labels:
