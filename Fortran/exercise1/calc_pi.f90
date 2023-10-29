@@ -4,6 +4,8 @@ use ISO_FORTRAN_ENV
 
 implicit none
 
+
+
 double precision     :: step, x, s, pi
 integer(kind=int64)  :: num_steps, i
 
