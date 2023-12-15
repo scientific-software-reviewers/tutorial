@@ -12,28 +12,41 @@ Start with the paper: If you don't have square paper, fold one corner
 of a rectangular sheet diagonally to create a triangle. Trim off the
 excess to get a square.
 
-Make the creases:  
+
 Fold the upper left corner to the lower right corner. Crease it well 
-and then unflold.
+and then unfold.
+
+![image](images/step_one.jpg)
 
 Fold the upper right corner to the lower left corner. Crease it well 
 and then unfold.
 
+![image](images/step_one.jpg)
+
 Fold the top half of the square down onto the bottom half. Crease it 
 well and then unfold.
 
-Bring the left and right sides to the center so that the paper collopses 
+![image](images/step_three.jpg)
+
+Fold the top half of the square down onto the bottom half. Crease it 
+well and then unfold.
+
+Bring the left and right sides to the center so that the paper collapses 
 into a triangle.
 
 Turn the triangle 90 degrees.
 
-Make the fishes fins:
+![image](images/step_three.jpg)
+
 Fold the bottom flap up, then fold the top flap over the bottom one. 
 
 Flip the paper over: Here is the fish!
 
+![image](images/step_twelve.jpg)
+
 Optional: Add details like eyes, scales, or fins by drawing them with a 
 pen or marker.
+
 
 Remember, origami can take a bit of practice to get just right, so don't 
 worry if it's not perfect on your first try. Have fun experimenting with 
