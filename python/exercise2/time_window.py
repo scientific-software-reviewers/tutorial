@@ -4,10 +4,10 @@ class TimeWindow:
     """ Observations for a TIEGCM experiment """
     
     def __init__(self, start_time, end_time, delta):
-        """ Initializes the observations associated with a TIEGCM experiment
+        """ Initialize the window and model times associated with a TIEGCM experiment
         
-        start_time - string '%Y-%m-%d %H:%M:%S' model start time of experiment
-        end_time   - string '%Y-%m-%d %H:%M:%S' model end time of experiment
+        start_time - string '%Y-%m-%d %H:%M:%S' model inital time
+        end_time   - string '%Y-%m-%d %H:%M:%S' model end time
         delta - integer  assimilation window time in hours
         
         model_time is the center of the window.
@@ -20,12 +20,20 @@ class TimeWindow:
                 
         """
         
+        # Error checking of delta input
         if delta > 23:
           raise ValueError("invalid delta {} should be [0-23] hours".format(delta))
-        
+
+        if delta < 0:
+          raise ValueError("invalid delta {} should be [0-23] hours".format(delta))
+
+        if delta == 0:
+          raise ValueError("invalid delta {} cannot be exactly 0 hours".format(delta))
+
+
         self.start_time = datetime.strptime(start_time, '%Y-%m-%d %H:%M:%S')
         self.end_time = datetime.strptime(end_time, '%Y-%m-%d %H:%M:%S')
-        self.delta = abs(delta)
+        self.delta = delta
         self.delta_half = delta / 2
             
         # create a list of times for the experiment
@@ -43,6 +51,8 @@ class TimeWindow:
         self.num_cycles = len(self.model_times)
 
     def info(self):
+
+        """ prints first and last window times """
 
         print("win num_cycles", self.num_cycles)
 
