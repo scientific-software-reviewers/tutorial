@@ -15,7 +15,7 @@ do i = 1, num_samples
     call random_number(x)
     call random_number(y)
     
-    if (x**2 + x**2 <= 1.0) then
+    if (x**2 + y**2 <= 1.0) then
         count_inside_circle = count_inside_circle + 1
     end if
 end do
