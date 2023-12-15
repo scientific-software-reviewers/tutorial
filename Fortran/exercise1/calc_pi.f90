@@ -1,10 +1,11 @@
 program calc_pi
+use iso_fortran_env
 implicit none
 
 integer, parameter :: num_samples = 1000000  ! Number of random samples
 
-real :: x, y
-real :: pi_approx
+real(real64) :: x, y
+real(real64) :: pi_approx
 integer :: i, count_inside_circle
 
 count_inside_circle = 0
