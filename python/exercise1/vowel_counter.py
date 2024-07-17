@@ -10,9 +10,11 @@ def num_vowels(text):
 
 def num_consonants(text):
     vowels = "aeiou"
+    num_consonants = 0
     for letter in text:
         if letter not in vowels:
-            print("consonant", letter)
+            num_consonants += text.lower().count(letter) 
+            #print("consonant", letter)
     
 text = str(input("Enter a sentence: "))
 
