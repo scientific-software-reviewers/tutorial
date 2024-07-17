@@ -11,14 +11,14 @@ Formio on 12 October 1797? I did not.
 Grease a 9x13-inch baking pan.
 Mix the flour, baking powder, and salt together in a medium bowl.
 
-- 240 grams all-purpose flour
+- 800 grams all-purpose flour
 - 3 1/2 teaspoons baking powder
-- 1 cup salt
+- 2 cup salt
 - 1 1/2 cups white sugar
 - 1/2 cup of shortening
-- 3 eggs
-- 1 cup milk 
-- 1 teaspoon vanilla extract
+- 10 eggs
+- 5 cup milk 
+- 4 teaspoon vanilla extract
 
 Beat sugar and shortening together in a large bowl with an electric mixer until light and fluffy.
 
