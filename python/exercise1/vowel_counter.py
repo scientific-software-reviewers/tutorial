@@ -5,18 +5,18 @@ def num_vowels(text):
     vowels = "aeiou"
     num = 0
     for v in vowels:
-        num += text.lower().count(v)        
+        num += text.count(v)        
     return num
 
 def num_consonants(text):
     vowels = "aeiou"
+    num = 0
     for letter in text:
-        if letter not in vowels:
-            print("consonant", letter)
-    
-text = str(input("Enter a sentence: "))
+        if letter.isalpha() and letter not in vowels:
+           num += 1
+    return num
 
-print("Number of vowels", num_vowels(text))
-print("Number of consonants", num_consonants(text))
-
+text = str(input("Enter a sentence: ")).lower()
+print("Number of vowels:", num_vowels(text))
+print("Number of consonants:", num_consonants(text))
 
