@@ -18,7 +18,7 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-     - uses: actions/checkout@v3
+     - uses: actions/checkout@v6
      - run: gh label create ${{ inputs.language }} -f
   create-pulls-matrix:
     needs: create-labels
@@ -33,7 +33,7 @@ jobs:
           echo "Language: ${{ inputs.language }}"
           echo "Exercise: ${{ matrix.exercise }}"
       # checkout repo
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
         with: 
          fetch-depth: 0
       - name: create issue for exercise ${{ inputs.exercise }}
